@@ -369,7 +369,7 @@ class TaskServiceImpl(
 
        val user = userRepository.findByIdAndDeletedFalse(id)?: throw Task1UniversalExceptionHandler(ErrorCodes.USER_NOT_FOUND)
 
-        balance.let { user.balance = it }
+        balance.let { user.balance += it }
 
         userRepository.save(user)
 
