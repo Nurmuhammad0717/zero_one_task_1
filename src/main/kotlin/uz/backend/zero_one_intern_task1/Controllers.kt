@@ -137,19 +137,19 @@ class UserPaymentTransactionController(val userPaymentTransactionService: UserPa
 @RequestMapping("api/v1/tasks")
 class TaskController(val tasksService: TasksService){
 
-    @PostMapping("{userId}")
+    @PostMapping("task1/{userId}")
     fun updateUserBalance(@PathVariable userId: Long, @RequestParam amount: BigDecimal ) = tasksService.updateUserBalance(userId,amount)
 
 
-    @GetMapping("{userId}")
+    @GetMapping("task2/{userId}")
     fun userPaymentTransactionHistory(@PathVariable userId : Long, pageable: Pageable ) = tasksService.userPaymentTransactionHistory(userId,pageable)
 
-    @GetMapping("{userId}")
+    @GetMapping("task3/{userId}")
     fun userTransactionItemHistory(@PathVariable userId: Long, pageable: Pageable) = tasksService.userTransactionItemHistory(userId,pageable)
 
-    @GetMapping("{id}")
+    @GetMapping("task4/{id}")
     fun transactionItems(@PathVariable id: Long) = tasksService.transactionItems(id)
 
-    @GetMapping("{userId}")
+    @GetMapping("task5/{userId}")
     fun allTransactionsHistoryForAdmins(@PathVariable userId: Long, pageable: Pageable) = tasksService.allTransactionsHistoryForAdmins(userId, pageable)
 }
