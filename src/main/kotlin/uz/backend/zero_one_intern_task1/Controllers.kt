@@ -5,6 +5,7 @@ import org.springframework.data.domain.Pageable
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import org.springframework.web.bind.annotation.ExceptionHandler
+import java.math.BigDecimal
 
 @ControllerAdvice
 class ExceptionHandler(private val errorMessageSource: ResourceBundleMessageSource) {
@@ -130,4 +131,25 @@ class UserPaymentTransactionController(val userPaymentTransactionService: UserPa
     @DeleteMapping("{id}")
     fun delete(@PathVariable id: Long) = userPaymentTransactionService.delete(id)
 
+}
+
+@RestController
+@RequestMapping("api/v1/tasks")
+class TaskController(val tasksService: TasksService){
+
+    @PostMapping("{userId}")
+    fun updateUserBalance(@PathVariable userId: Long, @RequestParam amount: BigDecimal ) = tasksService.updateUserBalance(userId,amount)
+
+
+    @GetMapping("{userId}")
+    fun userPaymentTransactionHistory(@PathVariable userId : Long, pageable: Pageable ) = tasksService.userPaymentTransactionHistory(userId,pageable)
+
+    @GetMapping("{userId}")
+    fun userTransactionItemHistory(@PathVariable userId: Long, pageable: Pageable) = tasksService.userTransactionItemHistory(userId,pageable)
+
+    @GetMapping("{id}")
+    fun transactionItems(@PathVariable id: Long) = tasksService.transactionItems(id)
+
+    @GetMapping("{userId}")
+    fun allTransactionsHistoryForAdmins(@PathVariable userId: Long, pageable: Pageable) = tasksService.allTransactionsHistoryForAdmins(userId, pageable)
 }
